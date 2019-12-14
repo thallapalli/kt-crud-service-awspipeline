@@ -20,7 +20,7 @@ public class CrudController {
 
 	@GetMapping(value = "/greetme/{name}")
 	public String greetme(@PathVariable String name) {
-		return "Super latest " + name;
+		return "Super latest1 " + name;
 	}
 
 	@GetMapping(value = "/retrievenotes")
