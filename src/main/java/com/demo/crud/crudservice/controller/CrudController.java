@@ -9,11 +9,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import com.demo.crud.crudservice.model.Note;
 import com.demo.crud.crudservice.repository.CrudRepository;
 
 @RestController
+@CrossOrigin(origins = "*")
 public class CrudController {
 	@Autowired
 	CrudRepository crudRepository;
