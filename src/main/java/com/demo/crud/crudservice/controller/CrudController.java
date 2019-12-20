@@ -42,7 +42,7 @@ public class CrudController {
 	}
 	@DeleteMapping(value="/deletenote/{id}")
 	public void deleteNote(@PathVariable int id){
-	noteRepository.deleteNote(id);
+		crudRepository.deleteNote(id);
 	}
 
 	
