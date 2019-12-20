@@ -23,7 +23,7 @@ public class CrudController {
 
 	@GetMapping(value = "/greetme/{name}")
 	public String greetme(@PathVariable String name) {
-		return "Hello Code Pipeline " + name;
+		return "Hello test mobile" + name;
 	}
 
 	@GetMapping(value = "/retrievenotes")
