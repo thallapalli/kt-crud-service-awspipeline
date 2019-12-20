@@ -29,6 +29,9 @@ public class CrudRepository {
 		return Jdbctemplate.update(Constants.SQL_UPDATE,
 				new Object[] { note.getName(), Integer.valueOf(note.getId()) });
 	}
+	public void deleteNote(int id) {
+		jdbcTemplate.update(Constants.SQL_DELETE, id);
+	}
 
 	
 }
