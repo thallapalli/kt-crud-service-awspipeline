@@ -43,6 +43,9 @@ public class UserResource {
 			throw new UserNotFoundException("id="+id);
 		}
 		else {
+			//HATEOAS
+			// "all-users" SERVER_PATH+"/users" 
+		//	Resour
 			return user;
 		}
 	}
