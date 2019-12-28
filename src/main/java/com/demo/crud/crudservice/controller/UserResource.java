@@ -45,7 +45,7 @@ public class UserResource {
 		else {
 			//HATEOAS
 			// "all-users" SERVER_PATH+"/users" 
-		//	Resour
+		
 			return user;
 		}
 	}
