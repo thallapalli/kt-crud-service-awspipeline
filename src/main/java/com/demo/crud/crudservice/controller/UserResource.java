@@ -1,5 +1,6 @@
 package com.demo.crud.crudservice.controller;
 
+import java.lang.reflect.Method;
 import java.net.URI;
 import java.util.List;
 
@@ -15,6 +16,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.web.util.UriComponents;
+import org.springframework.hateoas.Resource;
+import org.springframework.hateoas.mvc.ControllerLinkBuilder;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
 
 import com.demo.crud.crudservice.bean.User;
 import com.demo.crud.crudservice.controller.exception.UserNotFoundException;
@@ -37,7 +41,7 @@ public class UserResource {
 
 	@GetMapping("/users/{id}")
 
-	public User retriveUser(@PathVariable int id) {
+	public Resource<User> retriveUser(@PathVariable int id) {
 		User user = userDAOService.findOne(id);
 		if(user==null) {
 			throw new UserNotFoundException("id="+id);
@@ -45,8 +49,10 @@ public class UserResource {
 		else {
 			//HATEOAS
 			// "all-users" SERVER_PATH+"/users" 
-		
-			return user;
+			Resource<User> resource=new Resource<User>(user);
+			ControllerLinkBuilder linkTo = linkTo(methodOn(this.getClass()).retriveAllUser());
+			resource.add(linkTo.withRel("all-users"));
+			return resource;
 		}
 	}
 	@DeleteMapping("/users/{id}")
