@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
+import com.demo.crud.crudservice.bean.HelloworldBean;
 import com.demo.crud.crudservice.model.Note;
 import com.demo.crud.crudservice.repository.CrudRepository;
 
@@ -24,6 +25,10 @@ public class CrudController {
 	@GetMapping(value = "/greetme/{name}")
 	public String greetme(@PathVariable String name) {
 		return "Hello test mobile" + name;
+	}
+	@GetMapping(value = "/helloworldbean/{name}")
+	public HelloworldBean helloworldBean(@PathVariable String name) {
+		return new HelloworldBean(name);
 	}
 
 	@GetMapping(value = "/retrievenotes")
