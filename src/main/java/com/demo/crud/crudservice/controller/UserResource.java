@@ -3,6 +3,8 @@ package com.demo.crud.crudservice.controller;
 import java.net.URI;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -56,7 +58,7 @@ public class UserResource {
 
 	@PostMapping("/users")
 
-	public ResponseEntity<Object> createUser(@RequestBody User user) {
+	public ResponseEntity<Object> createUser(@Valid @RequestBody User user) {
 		User user1=userDAOService.save(user);
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("{id}").buildAndExpand(user1.getId()).toUri();
 		return ResponseEntity.created(location).build();
