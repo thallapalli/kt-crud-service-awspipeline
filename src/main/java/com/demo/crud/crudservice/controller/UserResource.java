@@ -43,6 +43,15 @@ public class UserResource {
 			return user;
 		}
 	}
+	@PostMapping("/users/{id}")
+
+	public void deleteUser(@PathVariable int id) {
+		User user = userDAOService.deleteById(id);
+		if(user==null) {
+			throw new UserNotFoundException("id="+id);
+		}
+		
+	}
 
 	@PostMapping("/users")
 
