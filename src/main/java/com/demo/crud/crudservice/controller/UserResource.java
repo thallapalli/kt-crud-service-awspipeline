@@ -69,7 +69,7 @@ public class UserResource {
 
 	public ResponseEntity<Object> createUser(@Valid @RequestBody User user) {
 		User user1=userDAOService.save(user);
-		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("{id}").buildAndExpand(user1.getId()).toUri();
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(user1.getId()).toUri();
 		return ResponseEntity.created(location).build();
 		
 
