@@ -5,6 +5,7 @@ import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,11 +33,11 @@ public class CrudController {
 		return "Hello test mobile" + name;
 	}
 	@GetMapping(value = "/greetmei18n/{name}")
-	public String greetmeini18N(@PathVariable String name,@RequestHeader(name="Accept-Language",required=false) Locale locale) {
+	public String greetmeini18N(@PathVariable String name, Locale locale) {
 		String country = locale.getCountry();
 		System.out.println("country-----------"+country);
 		
-		return messageSource.getMessage("greetme.message", null, locale);
+		return messageSource.getMessage("greetme.message", null, LocaleContextHolder.getLocale());
 		
 	}
 	@GetMapping(value = "/helloworldbean/{name}")
