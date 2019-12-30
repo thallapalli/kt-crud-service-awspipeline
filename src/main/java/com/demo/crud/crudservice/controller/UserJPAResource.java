@@ -21,6 +21,7 @@ import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
 
+import com.demo.crud.crudservice.bean.Post;
 import com.demo.crud.crudservice.bean.User;
 import com.demo.crud.crudservice.controller.exception.UserNotFoundException;
 import com.demo.crud.crudservice.dao.UserDAOService;
@@ -72,6 +73,18 @@ public class UserJPAResource {
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(user1.getId()).toUri();
 		return ResponseEntity.created(location).build();
 		
+
+	}
+	
+	@GetMapping("/jpa/users/{id}/posts")
+
+	public List<Post> retrieveAllPostsbyUserId(@PathVariable Integer id) {
+		Optional<User> user = userRepository.findById(id);
+		 if(!user.isPresent()) {
+			 throw new UserNotFoundException("User Not found");
+		 }
+		 List<Post> posts = user.get().getPosts();
+		return posts;
 
 	}
 }
