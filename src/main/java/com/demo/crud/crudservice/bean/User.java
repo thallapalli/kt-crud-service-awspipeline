@@ -1,14 +1,23 @@
 package com.demo.crud.crudservice.bean;
 
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 @ApiModel(description="API decsription about my User ")
+@Entity
 public class User {
+	@Id
+	@GeneratedValue
+	
 	private Integer id;
 	@Size(min = 2,max = 4)
 	@ApiModelProperty(notes="name should be 2 characters macha")
@@ -16,6 +25,8 @@ public class User {
 	@Past
 	@ApiModelProperty(notes="BDay canot in prasent future")
 	private Date birthDate;
+	@OneToMany(mappedBy = "user")
+	private List<Post> posts;
 	public Integer getId() {
 		return id;
 	}
@@ -43,6 +54,15 @@ public class User {
 		this.id = id;
 		this.name = name;
 		this.birthDate = birthDate;
+	}
+	public User() {
+		super();
+	}
+	public List<Post> getPosts() {
+		return posts;
+	}
+	public void setPosts(List<Post> posts) {
+		this.posts = posts;
 	}
 	
 

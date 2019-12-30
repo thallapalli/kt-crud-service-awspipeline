@@ -17,11 +17,11 @@ public class PersonVersionController {
  public Person2 person2() {
 	 return new Person2(new Name("Karnakar","Thallapalli"));
  }
-	@GetMapping(value="person/version",params="version=1")
+	@GetMapping(value="person/version",headers="X-API-VERSION=1")
 	 public Person1 person1asparam() {
 		 return new Person1("KT 1");
 	 }
-	@GetMapping(value="person/version",params="version=2")
+	@GetMapping(value="person/version",headers="X-API-VERSION=2")
 	 public Person2 person2asparam() {
 		 return new Person2(new Name("Karnakar","Thallapalli"));
 	 }
