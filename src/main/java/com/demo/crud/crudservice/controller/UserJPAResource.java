@@ -25,6 +25,7 @@ import com.demo.crud.crudservice.bean.Post;
 import com.demo.crud.crudservice.bean.User;
 import com.demo.crud.crudservice.controller.exception.UserNotFoundException;
 import com.demo.crud.crudservice.dao.UserDAOService;
+import com.demo.crud.crudservice.repo.PostRepository;
 import com.demo.crud.crudservice.repo.UserRepository;
 
 @RestController
@@ -33,6 +34,8 @@ public class UserJPAResource {
 	private UriComponents buildAndExpand;
 	@Autowired
  private UserRepository userRepository;
+	@Autowired
+	 private PostRepository postRepository;
 	// retriveAllUser
 	// retriveAllUser(int id);
 	@GetMapping("/jpa/users")
@@ -72,6 +75,22 @@ public class UserJPAResource {
 		User user1=userRepository.save(user);
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(user1.getId()).toUri();
 		return ResponseEntity.created(location).build();
+		
+
+	}
+	@PostMapping("/jpa/users/{id}/posts")
+
+	public ResponseEntity<Object> createPost(@PathVariable Integer id,@RequestBody Post post) {
+		Optional<User> user1=userRepository.findById(id);
+		if(!user1.isPresent()) {
+			 throw new UserNotFoundException("User Not found");
+		}
+		User user = user1.get();
+		post.setUser(user);
+		postRepository.save(post);
+		URI savedpost = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(post.getId()).toUri();
+		return ResponseEntity.created(savedpost).build();
+		
 		
 
 	}
