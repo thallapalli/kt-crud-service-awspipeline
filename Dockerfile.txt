@@ -1,1 +1,5 @@
-asd
+FROM amd64/openjdk
+EXPOSE 8080
+WORKDIR /usr/local/bin
+COPY ./target/kt-crud-service-awspipeline-0.0.1-SNAPSHOT.jar webapp.jar
+CMD ["java","-Dspring.profiles.active=docke-demo","-jar","webapp.jar"]
